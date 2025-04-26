@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OOP MCQ Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #232526 0%, #414345 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            background: #181a1b;
+            padding: 32px 24px 24px 24px;
+            border-radius: 18px;
+            width: 95%;
+            max-width: 520px;
+            margin: 40px auto 0 auto;
+            box-shadow: 0 8px 32px rgba(30,40,60,0.25), 0 1.5px 8px rgba(46,125,50,0.10);
+            position: relative;
+            transition: box-shadow 0.3s;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .select-row {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        label[for="weekSelector"] {
+            color: #b2ffb2;
+            font-size: 15px;
+            margin-right: 8px;
+            font-weight: 500;
+        }
+        select {
+            padding: 4px 14px;
+            border-radius: 6px;
+            border: 1.5px solid #43a047;
+            background: #23272b;
+            color: #e0e0e0;
+            font-size: 15px;
+            outline: none;
+            margin-left: 0;
+            margin-bottom: 0;
+            margin-top: 0;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+            min-width: 110px;
+            max-width: 160px;
+        }
+        select:focus {
+            border: 2px solid #81c784;
+            background: #181a1b;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: #23272b;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-bar-fg {
+            height: 100%;
+            background: linear-gradient(90deg, #43a047 0%, #81c784 100%);
+            border-radius: 6px;
+            transition: width 0.3s;
+        }
+        .question-card {
+            background: #222325;
+            border-radius: 12px;
+            padding: 24px 18px 18px 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(30,40,60,0.10);
+            transition: box-shadow 0.2s;
+        }
+        .question {
+            font-size: 19px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #b2ffb2;
+        }
+        .options-container {
+            margin-bottom: 10px;
+        }
+        .option {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #e0e0e0;
+            background: #23272b;
+            border-radius: 7px;
+            padding: 7px 12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 3px rgba(46,125,50,0.08);
+        }
+        .option input[type="radio"] {
+            accent-color: #43a047;
+            margin-right: 14px;
+            width: 18px;
+            height: 18px;
+            transition: accent-color 0.2s;
+        }
+        .option:hover {
+            background: #2e7d32;
+            color: #fff;
+        }
+        .correct {
+            background: #388e3c !important;
+            color: #fff;
+            font-weight: bold;
+            border: 1.5px solid #81c784;
+        }
+        .incorrect {
+            background: #b71c1c !important;
+            color: #fff;
+            font-weight: bold;
+            border: 1.5px solid #ef5350;
+        }
+        .score, .result {
+            margin-top: 18px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            gap: 10px;
+        }
+        button {
+            padding: 11px 22px;
+            background: linear-gradient(90deg, #43a047 0%, #388e3c 100%);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 1.5px 6px rgba(46,125,50,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        button:hover:not(:disabled) {
+            background: linear-gradient(90deg, #388e3c 0%, #43a047 100%);
+            box-shadow: 0 2px 8px rgba(46,125,50,0.14);
+        }
+        button:disabled {
+            background: #555;
+            color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 14px 2vw 18px 2vw; }
+            .question-card { padding: 14px 6px 12px 6px; }
+            .question { font-size: 16px; }
+            button { font-size: 15px; padding: 10px 13px; }
+        }
+        .option {
+    display: block;
+    cursor: pointer;
+    /* ...rest of your styles... */
+}
+.progress-bar-bg { width: 100%; height: 8px; background: #23272b; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
+.progress-bar-fg { height: 100%; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); border-radius: 6px; transition: width 0.3s; width: 0%; }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>OOP MCQ Test</h1>
+    <div class="select-row">
+        <label for="weekSelector">Select Week:</label>
+        <select id="weekSelector" onchange="loadQuestions()">
+            <option value="week1">Week 1</option>
+            <option value="week2">Week 2</option>
+            <option value="week3">Week 3</option>
+            <option value="week4">Week 4</option>
+            <option value="week5">Week 5</option>
+            <option value="week6">Week 6</option>
+            <option value="week7">Week 7</option>
+            <option value="week8">Week 8</option>
+            <option value="week9">Week 9</option>
+            <option value="week10">Week 10</option>
+            <option value="week11">Week 11</option>
+            <option value="week12">Week 12</option>
+        </select>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fg" id="progressBar"></div></div>
+
+    <div id="quiz"></div>
+    <div class="score" id="score">Score: 0</div>
+    <div class="result" id="result"></div>
+</div>
+<script>
+const week1Questions = [
+    { question: "Which of the following OOP principles ensures that a derived class can modify behavior inherited from a base class?", options: ["Inheritance", "Abstraction", "Encapsulation", "Polymorphism"], answer: "Polymorphism" },
+    { question: "Which of the following is not a characteristic of object-oriented programming?", options: ["Encapsulation", "Polymorphism", "Functional composition", "Inheritance"], answer: "Functional composition" },
+    { question: "If a class is considered a 'set' in mathematical terms, which of the following could be considered as objects?", options: ["Functions defined on the set", "Elements of the set", "Subsets of the set", "Realized instances of the set (e.g., empty set)"], answer: "Realized instances of the set (e.g., empty set)" },
+    { question: "Encapsulation can be mathematically represented as:", options: ["f:X→Y where X and Y represent private and public data, respectively.", "f:A→A where f is identity over the class.", "X=Y implying data and methods are the same.", "f:X→X where f is a structure-preserving map over private data."], answer: "f:X→Y where X and Y represent private and public data, respectively." },
+    { question: "Which of the following best describes polymorphism in a mathematical sense?", options: ["Multiple functions f1:A→B, f2:C→D, etc., with the same name but possibly independent input-output types.", "A single function f defined as f:A→B and f:C→D, operating across different domains and codomains.", "A function f:A→A that maps elements within the same domain and codomain.", "A composite function f∘g:X→Y, where g:X→Z and f:Z→Y, used to chain operations."], answer: "Multiple functions f1:A→B, f2:C→D, etc., with the same name but possibly independent input-output types." },
+    { question: "Inheritance in OOP is most analogous to:", options: ["Set theory: Subsets inheriting properties of supersets.", "Group theory: Groups inheriting properties of subgroups.", "Graph theory: Nodes inheriting edges.", "Linear algebra: Matrices inheriting vector spaces."], answer: "Set theory: Subsets inheriting properties of supersets." },
+    { question: "Which of the following best encapsulates the core purpose of object-oriented programming?", options: ["Maximizing code reuse and scalability.", "Simplifying logical flow in functional applications.", "Optimizing mathematical operations on datasets.", "Ensuring type safety at runtime."], answer: "Maximizing code reuse and scalability." },
+    { question: "In an object-oriented system, relationships between objects are best modeled as:", options: ["Directed graphs", "Bipartite graphs", "Sets with cardinality constraints", "Undirected graphs"], answer: "Directed graphs" },
+    { question: "Which of the following best explains the idea of abstraction in OOP?", options: ["Hiding unnecessary details and showing only the relevant features.", "A mapping between two completely unrelated concepts.", "Defining all possible implementations explicitly in a class.", "Combining unrelated objects into a single type."], answer: "Hiding unnecessary details and showing only the relevant features." },
+    { question: "Polymorphism in OOP is analogous to which of the following concepts?", options: ["A function that behaves differently depending on the input.", "Using the same name for multiple variables in a program.", "A method that only works with one specific type of data.", "Changing the internal logic of a program without altering its behavior."], answer: "A function that behaves differently depending on the input." }
+];
+
+const week2Questions = [
+    { question: "Which of the following best describes a class in object-oriented programming?", options: ["A block of code that defines functions only.", "A blueprint for creating objects, encapsulating data and methods.", "A template for functions without data.", "A data structure for storing primitive data types."], answer: "A blueprint for creating objects, encapsulating data and methods." },
+    { question: "What happens when an object is created from a class in C++?", options: ["Memory is allocated for the object’s member variables only.", "Memory is allocated for member functions and variables.", "Member functions are inherited and memory is allocated for them.", "Member functions are shared across objects, and memory is allocated only for variables."], answer: "Member functions are shared across objects, and memory is allocated only for variables." },
+    { question: "Which of the following statements about constructors is false?", options: ["Constructors must have the same name as the class.", "Constructors can be overloaded in C++.", "Constructors cannot be private in C++.", "Constructors do not have a return type."], answer: "Constructors cannot be private in C++." },
+    { question: "In a Java program to define a class Circle with: A constructor that initializes its radius. A method getArea() to return the area of the circle. Identify the correct syntax to create an object of this class.", options: ["Circle c1 = new Circle();", "Circle c1 = new Circle(radius);", "Circle c1 = Circle(radius);", "Circle c1 = new Circle[radius];"], answer: "Circle c1 = new Circle(radius);" },
+    { question: "What is the primary purpose of a destructor in C++?", options: ["To initialize an object when it is created.", "To release memory and resources when an object is destroyed.", "To overload operators for memory allocation.", "To define default behavior for inheritance."], answer: "To release memory and resources when an object is destroyed." },
+    { question: "A class in C++ has multiple constructors. How does the compiler decide which constructor to use?", options: ["Based on the return type.", "Based on the arguments passed during object creation.", "The first constructor is always used.", "The last constructor is always used."], answer: "Based on the arguments passed during object creation." },
+    { question: "In a C++ program that defines a class FileHandler with a constructor that opens a file and a destructor that closes the file. Demonstrates file handling using objects of this class. Choose the correct constructor signature:", options: ["FileHandler(std::string filename);", "FileHandler(char* filename);", "FileHandler(const char filename[]);", "All of the above"], answer: "All of the above" }
+];
+
+const week3Questions = [
+    { question: "In C++, ambiguity occurs in multiple inheritance when:", options: [
+        "A derived class has a method with the same name as a method in the base class.",
+        "Two base classes have methods with the same name, and a derived class inherits from both.",
+        "A derived class has no constructor defined.",
+        "A base class has a private member function."
+    ], answer: "Two base classes have methods with the same name, and a derived class inherits from both." },
+    { question: "In a program to demonstrate multilevel inheritance with the following requirements:\nClass A contains a method display() that prints ”Class A”.\nClass B inherits from A and adds a method show() that prints ”Class B”.\nClass C inherits from B and adds a method output() that prints ”Class C”.\nWhich of the following correctly calls all three methods from an object of C?", options: [
+        "C obj; obj.display(); obj.show(); obj.output();",
+        "B obj; obj.show(); obj.output();",
+        "A obj; obj.display(); obj.show(); obj.output();",
+        "C obj; obj.output();"
+    ], answer: "C obj; obj.display(); obj.show(); obj.output();" },
+    { question: "Which of the following is true about method overriding in Java?", options: [
+        "The overridden method must have a different return type.",
+        "The overridden method must have the same name and parameters as the base class method.",
+        "The base class method must be private.",
+        "Overriding is not possible in Java."
+    ], answer: "The overridden method must have the same name and parameters as the base class method." },
+    { question: "Which of the following statements about virtual functions is false?", options: [
+        "Virtual functions allow dynamic (runtime) polymorphism.",
+        "A virtual function must be declared as virtual in the base class.",
+        "A virtual function can have default arguments.",
+        "A virtual function cannot be overridden in a derived class."
+    ], answer: "A virtual function cannot be overridden in a derived class." },
+    { question: "Write a C++ program to demonstrate virtual functions with the following requirements:\nBase class Shape has a virtual function area().\nDerived class Rectangle overrides area() to compute the area of a rectangle.\nDerived class Circle overrides area() to compute the area of a circle.\nWhich of the following correctly uses a base class pointer to call area() for both shapes?", options: [
+        "Shape* ptr; Rectangle rect; ptr = &rect; ptr->area();",
+        "Shape* ptr = new Circle(); ptr->area();",
+        "Both A and B",
+        "None of the above"
+    ], answer: "Both A and B" },
+    { question: "When a class is derived from a base class using protected inheritance, how are the public and protected members of the base class treated in the derived class?", options: [
+        "They both become private members in the derived class.",
+        "They both remain public members in the derived class.",
+        "They both become protected members in the derived class.",
+        "They are inaccessible in the derived class."
+    ], answer: "They both become protected members in the derived class." },
+    { question: "Which of the following is a potential problem associated with multiple inheritance in C++?", options: [
+        "Ambiguity in accessing members when two base classes have members with the same name.",
+        "Lack of runtime polymorphism.",
+        "Inability to overload operators in derived classes.",
+        "Restriction on the number of base classes a derived class can inherit from."
+    ], answer: "Ambiguity in accessing members when two base classes have members with the same name." }
+];
+
+const week4Questions = [
+    { question: "Which of the following best describes polymorphism in object-oriented programming?", options: [
+        "A class having multiple constructors.",
+        "The ability of different objects to respond to the same function call in different ways.",
+        "A function having the same name as its class.",
+        "None of the above."
+    ], answer: "The ability of different objects to respond to the same function call in different ways." },
+    { question: "Which of the following is an example of static polymorphism?", options: [
+        "Method overloading",
+        "Virtual functions",
+        "Abstract classes",
+        "Method overriding"
+    ], answer: "Method overloading" },
+    { question: "In a C++ program to overload the * operator for a class Matrix, where:\nThe class stores a 2D matrix as a private member.\nThe * operator multiplies two matrices.\nThe result of multiplication is displayed in the console.\nWhich of the following correctly implements the operator overloading?", options: [
+        "The operator is defined inside the class.",
+        "The operator is defined as a friend function.",
+        "Both A and B are valid.",
+        "Operator overloading is not possible for matrix multiplication."
+    ], answer: "Both A and B are valid." },
+    { question: "Which of the following is true about virtual functions in C++?", options: [
+        "They allow runtime polymorphism.",
+        "They must be redefined in the derived class.",
+        "They can be called on an object of the base class.",
+        "They cannot be used with pointers."
+    ], answer: "They allow runtime polymorphism." },
+    { question: "Which of the following is a limitation of static polymorphism?", options: [
+        "It requires pointers.",
+        "It is resolved at compile time and cannot adapt to runtime behavior.",
+        "It can only be implemented in C++.",
+        "It cannot be overloaded."
+    ], answer: "It is resolved at compile time and cannot adapt to runtime behavior." },
+    { question: "In a C++ program to demonstrate both static and dynamic polymorphism using the following:\nMethod overloading for static polymorphism.\nVirtual functions for dynamic polymorphism.\nWhich of the following correctly calls both overloaded and overridden methods?\n\nOverloaded methods are called directly, and overridden methods are called using a base class pointer.\n\nOverloaded methods are called using a base class pointer, and overridden methods are called directly.\nBoth methods are called directly.\nBoth methods require pointers.", options: [
+        "Overloaded methods are called directly, and overridden methods are called using a base class pointer.",
+        "Overloaded methods are called using a base class pointer, and overridden methods are called directly.",
+        "Both methods are called directly.",
+        "Both methods require pointers."
+    ], answer: "Overloaded methods are called directly, and overridden methods are called using a base class pointer." }
+];
+
+const week5Questions = [
+    {
+        question: "Which of the following access specifiers allows a member to be accessible only within the same package in Java?",
+        options: [
+            "private",
+            "protected",
+            "Default(no modifier)",
+            "public"
+        ],
+        answer: "Default(no modifier)"
+    },
+    {
+        question: "Write a C++ program to demonstrate the use of all three access specifiers (public, protected, and private) in a class.\nDefine a Base class with three variables: one for each access specifier.\nDefine a Derived class that inherits from Base.\nShow how the derived class can access the protected and public members but not the private member.\nWhich of the following is true?",
+        options: [
+            "Private members are accessible in the derived class.",
+            "Protected members are accessible in the derived class.",
+            "Only public members are accessible in the derived class.",
+            "None of the above."
+        ],
+        answer: "Protected members are accessible in the derived class."
+    },
+    {
+        question: "Which of the following statements is true about abstract classes and interfaces in Java?",
+        options: [
+            "An abstract class cannot have concrete methods.",
+            "Interfaces can have constructors.",
+            "An interface can extend another interface.",
+            "Abstract classes cannot be inherited."
+        ],
+        answer: "An interface can extend another interface."
+    },
+    {
+        question: "Write a Java program that:\nDefines an interface Shape with a method area().\nImplements the interface in two classes: Circle and Rectangle.\nWhat is the correct way to implement the area() method in Circle?",
+        options: [
+            "public double area(){ return Math.PI * radius * radius; }",
+            "private double area() { return Math.PI * radius * radius; }",
+            "public void area() { System.out.println(radius * radius); }",
+            "protected double area() { return Math.PI * radius * radius; }"
+        ],
+        answer: "public double area(){ return Math.PI * radius * radius; }"
+    },
+    {
+        question: "Which of the following best describes the purpose of data hiding in OOP?",
+        options: [
+            "To optimize memory usage.",
+            "To prevent unauthorized access to class data.",
+            "To allow multiple inheritance.",
+            "To ensure faster compilation."
+        ],
+        answer: "To prevent unauthorized access to class data."
+    },
+    {
+        question: "What is a key difference between abstract classes and interfaces in Java?",
+        options: [
+            "Abstract classes support multiple inheritance, interfaces do not.",
+            "Abstract classes can have concrete methods, interfaces cannot.",
+            "Interfaces can have static methods, abstract classes cannot.",
+            "An interface can only be implemented, not extended."
+        ],
+        answer: "Interfaces can have static methods, abstract classes cannot."
+    },
+    {
+        question: "What is required for method overriding in polymorphism?",
+        options: [
+            "The method must have the same name but different parameters.",
+            "The method must have the same name, return type, and parameters in a parent and child class.",
+            "The method must be marked as static.",
+            "The method must be private in the base class."
+        ],
+        answer: "The method must have the same name, return type, and parameters in a parent and child class."
+    }
+];
+
+const week6Questions = [
+    {
+        question: "Which of the following is a checked exception in Java?",
+        options: [
+            "ArithmeticException",
+            "IOException",
+            "NullPointerException",
+            "ArrayIndexOutOfBoundsException"
+        ],
+        answer: "IOException"
+    },
+    {
+        question: "Which of the following is true about unchecked exceptions in Java?",
+        options: [
+            "They must be declared in the method’s throws clause.",
+            "They must be handled using a try-catch block.",
+            "They are not checked by the compiler at compile time.",
+            "They do not extend Throwable."
+        ],
+        answer: "They are not checked by the compiler at compile time."
+    },
+    {
+        question: "To write a custom exception class in C++ to handle invalid age inputs, what is the correct signature for the custom exception constructor?\nThe class should inherit from std::exception.\nThe constructor should accept a string message.\nThe what() method should return the custom message.",
+        options: [
+            "InvalidAgeException(std::string msg);",
+            "InvalidAgeException(const std::string& msg);",
+            "InvalidAgeException(char* msg);",
+            "All of the above."
+        ],
+        answer: "InvalidAgeException(const std::string& msg);"
+    },
+    {
+        question: "Which of the following statements about the finally block in Java is true?",
+        options: [
+            "It is executed only if no exception is thrown.",
+            "It is executed only if an exception is caught.",
+            "It is executed regardless of whether an exception is thrown or caught.",
+            "It is executed before the catch block."
+        ],
+        answer: "It is executed regardless of whether an exception is thrown or caught."
+    },
+    {
+        question: "To write a Java program that:\nReads an integer input from the user.\nThrows an ArithmeticException if the number is negative.\nThrows an IOException if the input is not a valid number.\nCatches and handles both exceptions.\nWhich of the following is a correct implementation?",
+        options: [
+            "Two separate catch blocks for each exception.",
+            "A single catch block with catch(Exception e).",
+            "Nested try-catch blocks.",
+            "Both A and C."
+        ],
+        answer: "Both A and C."
+    },
+    {
+        question: "Consider the following situations and select the correct exception type that would be thrown in the case- ‘A function is called with an argument that is invalid for its operation.",
+        options: [
+            "std::invalid argument",
+            "std::length error",
+            "std::out of range",
+            "std::runtime error"
+        ],
+        answer: "std::invalid argument"
+    },
+    {
+        question: "Which of the following statements about the throws keyword in Java is correct?",
+        options: [
+            "The throws keyword must be used for all exceptions, including unchecked exceptions like NullPointerException.",
+            "The throws keyword is used in the method signature to declare checked exceptions that a method might throw, allowing the caller to handle them.",
+            "The throws keyword is used to catch and handle exceptions within a method.",
+            "The throws keyword automatically handles the exception without requiring a try-catch block."
+        ],
+        answer: "The throws keyword is used in the method signature to declare checked exceptions that a method might throw, allowing the caller to handle them."
+    }
+];
+
+const week7Questions = [
+    {
+        question: "To write a C++ program that reads the contents of a file input.txt and copies it to output.txt, which of the following achieves this?",
+        options: [
+            "Using ifstream and ofstream to read and write line by line.",
+            "Using ifstream and ofstream with a buffer.",
+            "Both A and B.",
+            "File copy cannot be achieved in C++."
+        ],
+        answer: "Both A and B."
+    },
+    {
+        question: "To write a Java program to serialize an object of a class Student with attributes name and id, which of the following statements is true about serialization in Java?",
+        options: [
+            "The class must implement Serializable.",
+            "Attributes must be declared as private.",
+            "Serialization writes the object to a binary file.",
+            "All of the above."
+        ],
+        answer: "All of the above."
+    },
+    {
+        question: "What is the correct method to read a serialized object from a file in Java?",
+        options: [
+            "readObject() from the ObjectInputStream.",
+            "deserialize() from the Serializable interface.",
+            "read() from the FileReader.",
+            "deserialize() from the Deserializable interface."
+        ],
+        answer: "readObject() from the ObjectInputStream."
+    },
+    {
+        question: "To write a C++ program to serialize a class Employee with attributes name and age with following functionality:\nWrite the object data to a binary file.\nRead the object data back from the file.\nWhat is the correct method to write and read binary data using file streams?",
+        options: [
+            "ofstream::write() and ifstream::read().",
+            "ofstream::write() and ifstream::getline().",
+            "ofstream::put() and ifstream::get().",
+            "ofstream::getline() and ifstream::getline()."
+        ],
+        answer: "ofstream::write() and ifstream::read()."
+    },
+    {
+        question: "To write a Java program to merge the contents of two text files file1.txt and file2.txt into output.txt, which of the following steps is necessary?",
+        options: [
+            "Open both input files using FileReader.",
+            "Read the contents line by line and write them to the output file using FileWriter.",
+            "Close all the files after the operation is complete.",
+            "All of the above."
+        ],
+        answer: "All of the above."
+    },
+    {
+        question: "In Java, which of the following statements about the readObject() method when customizing deserialization is correct?",
+        options: [
+            "The readObject() method must call defaultReadObject() to ensure the non-transient fields are correctly deserialized.",
+            "The readObject() method is only used for reading transient fields and should not call defaultReadObject().",
+            "The readObject() method cannot be overridden in a Serializable class.",
+            "The readObject() method is automatically generated by the Java compiler and cannot be customized."
+        ],
+        answer: "The readObject() method must call defaultReadObject() to ensure the non-transient fields are correctly deserialized."
+    },
+    {
+        question: "In C++, when serializing an object by writing its raw memory to a binary file using reinterpret cast, which of the following statements is true regarding portability and object reconstruction?",
+        options: [
+            "This method ensures platform-independent serialization, and the object can be safely deserialized on any machine.",
+            "This method may lead to issues due to differences in endianness, padding, and alignment between different systems, making deserialization unsafe across platforms.",
+            "The use of reinterpret cast guarantees that the object’s virtual table pointers are correctly serialized and deserialized.",
+            "C++ provides built-in serialization support that handles these issues automatically."
+        ],
+        answer: "This method may lead to issues due to differences in endianness, padding, and alignment between different systems, making deserialization unsafe across platforms."
+    },
+    {
+        question: "Considering the differences between text mode and binary mode in C++ file I/O, which of the following statements is accurate?",
+        options: [
+            "In text mode, newline characters are translated to the system’s native line-ending representation, while in binary mode, no such translation occurs.",
+            "Binary mode is preferred for reading and writing text files because it handles newline characters correctly across different platforms.",
+            "There is no difference between text mode and binary mode in modern C++ implementations.",
+            "When opening a file in binary mode, data is automatically compressed to save space."
+        ],
+        answer: "In text mode, newline characters are translated to the system’s native line-ending representation, while in binary mode, no such translation occurs."
+    }
+];
+
+const week8Questions = [
+    {
+        question: "To write a template function in C++ to find the maximum of two values. Which of the following implementations is correct?",
+        options: [
+            "template<typename T> T max(T a, T b) { return (a > b) ? a : b; }",
+            "template<typename T> void max(T a, T b) { return (a > b) ? a : b; }",
+            "template<int T> T max(T a, T b) { return (a > b) ? a : b; }",
+            "template<typename T> T max(int a, int b) { return (a > b) ? a : b; }"
+        ],
+        answer: "template<typename T> T max(T a, T b) { return (a > b) ? a : b; }"
+    },
+    {
+        question: "Which of the following statements is true about template classes in C++?",
+        options: [
+            "Template classes cannot have non-template member functions.",
+            "Template classes can be instantiated for any data type.",
+            "Template classes must inherit from a base class.",
+            "Template classes cannot have constructors."
+        ],
+        answer: "Template classes can be instantiated for any data type."
+    },
+    {
+        question: "To write a C++ program to define a template class Box with the following:\nA private member to store data.\nA constructor to initialize the data.\nA method getData() to return the stored data.\nWhich of the following correctly instantiates the template class?",
+        options: [
+            "Box<int> intBox(42);",
+            "Box<int> intBox;",
+            "Box<int, float> intBox(42);",
+            "Box stringBox(\"Hello\");"
+        ],
+        answer: "Box<int> intBox(42);"
+    },
+    {
+        question: "What is the primary purpose of generics in Java?",
+        options: [
+            "To allow multiple inheritance.",
+            "To perform runtime type checking.",
+            "To enforce compile-time type safety.",
+            "To improve code execution speed."
+        ],
+        answer: "To enforce compile-time type safety."
+    },
+    {
+        question: "To write a generic class in Java called Container with the following:\nA private attribute value of generic type T.\nA constructor to initialize value.\nA method getValue() to return the stored value.\nWhich of the following correctly defines the class?",
+        options: [
+            "class Container<T> { private T value; }",
+            "class Container { private T value; }",
+            "class Container<T, U> { private T value; }",
+            "class Container(T) { private T value; }"
+        ],
+        answer: "class Container<T> { private T value; }"
+    },
+    {
+        question: "To write a Python function get_first_element() using generics that:\nAccepts a list of any type.\nReturns the first element of the list.\nWhich of the following correctly defines the function?",
+        options: [
+            "def get_first_element(lst): return lst[0]",
+            "from typing import List, TypeVar\nT = TypeVar('T')\ndef get_first_element(lst: List[T]) -> T: return lst[0]",
+            "def get_first_element(lst: List[T]) -> T: return lst[0]",
+            "from typing import TypeVar\nT = TypeVar('T')\ndef get_first_element(lst) -> T: return lst[0]"
+        ],
+        answer: "from typing import List, TypeVar\nT = TypeVar('T')\ndef get_first_element(lst: List[T]) -> T: return lst[0]"
+    },
+    {
+        question: "Which of the following is a common use case for templates in C++ and generics in Java?",
+        options: [
+            "Creating reusable and type-safe data structures.",
+            "Enforcing runtime type checking.",
+            "Avoiding the use of constructors.",
+            "Improving execution time by avoiding pointers."
+        ],
+        answer: "Creating reusable and type-safe data structures."
+    },
+    {
+        question: "Which of the following is true about templates in C++ and generics in Java?",
+        options: [
+            "Templates in C++ are resolved at runtime, while generics in Java are resolved at compile time.",
+            "Generics in Java use type erasure, while templates in C++ do not.",
+            "Both templates and generics support multiple inheritance.",
+            "Templates and generics are identical in their implementation."
+        ],
+        answer: "Generics in Java use type erasure, while templates in C++ do not."
+    },
+    {
+        question: "Which of the following is not an advantage of using templates in C++?",
+        options: [
+            "Dynamic Memory Allocation",
+            "Code Reusability",
+            "Performance Efficiency",
+            "Type Safety"
+        ],
+        answer: "Dynamic Memory Allocation"
+    }
+];
+const week9Questions = [
+    {
+        question: "Which of the following is an associative container in STL?",
+        options: ["vector", "deque", "set", "list"],
+        answer: "set"
+    },
+    {
+        question: "Which of the following containers allows bidirectional iterators in STL?",
+        options: ["vector", "deque", "set", "array"],
+        answer: "set"
+    },
+    {
+        question: "In a C++ program to:\nCreate a vector<int> containing the elements 5, 15, 10, 20, 25.\nUse std::max element() to find the maximum element.\nPrint the maximum element.\nWhat is the output of the program?",
+        options: ["25", "20", "Compilation error", "Undefined behavior"],
+        answer: "25"
+    },
+    {
+        question: "Which of the following is a non-modifying algorithm in STL?",
+        options: ["std::sort()", "std::copy()", "std::find()", "std::remove()"],
+        answer: "std::find()"
+    },
+    {
+        question: "In a C++ program to:\nCreate a vector<int> containing 50, 10, 40, 30, 20.\nSort the vector in ascending order using std::sort().\nPrint the sorted elements.\nWhat is the correct sequence of output?",
+        options: ["10 20 30 40 50", "50 40 30 20 10", "Compilation error", "Undefined behavior"],
+        answer: "10 20 30 40 50"
+    },
+    {
+        question: "In a C++ program that:\nCreates a map<string, int> to store student names and their marks.\nAdds the entries Alice: 90, Bob: 85, Charlie: 95.\nPrints all entries using an iterator.\nWhat is the correct output?",
+        options: ["Alice: 90, Bob: 85, Charlie: 95", "Bob: 85, Charlie: 95, Alice: 90", "Compilation error", "Undefined behavior"],
+        answer: "Alice: 90, Bob: 85, Charlie: 95"
+    },
+    {
+        question: "In a program to:\nCreate a set<int> containing the elements 50, 10, 30, 20, 40.\nUse an iterator to traverse the set and print the elements.\nUse std::find() to check if 30 exists in the set.\nWhich of the following is true?",
+        options: ["The output is sorted in ascending order, and 30 is found.", "The output is sorted in descending order, and 30 is not found.", "The elements are printed in the order they were added.", "Compilation error."],
+        answer: "The output is sorted in ascending order, and 30 is found."
+    },
+    {
+        question: "Which of the following operations is not directly supported by the std::list container in C++ (which implements a doubly linked list)?",
+        options: ["Insertion of elements at the front of the list", "Insertion of elements at the back of the list", "Direct access to elements by index", "Removal of elements from the front of the list"],
+        answer: "Direct access to elements by index"
+    }
+];
+
+const week10Questions = [
+    {
+        question: "Which of the following is the primary purpose of the Singleton pattern?",
+        options: [
+            "To allow multiple instances of a class.",
+            "To restrict a class to a single instance and provide global access to it.",
+            "To create objects based on a condition.",
+            "To improve inheritance in a class hierarchy."
+        ],
+        answer: "To restrict a class to a single instance and provide global access to it."
+    },
+    {
+        question: "To write a Java implementation of the Singleton pattern that ensures thread safety. Which of the following is a correct implementation?",
+        options: [
+            "Use synchronized blocks in getInstance().",
+            "Use the volatile keyword with the instance variable.",
+            "Use a static block for initialization.",
+            "All of the above."
+        ],
+        answer: "All of the above."
+    },
+    {
+        question: "To write a C++ implementation of the Factory pattern to create objects of classes Circle and Square, both inheriting from an abstract base class Shape. Which of the following correctly defines the createShape() method?",
+        options: [
+            "Shape* createShape(const std::string& type)",
+            "Circle* createShape(const std::string& type)",
+            "Square* createShape(const std::string& type)",
+            "Shape createShape(const std::string& type)"
+        ],
+        answer: "Shape* createShape(const std::string& type)"
+    },
+    {
+        question: "What is the primary purpose of the Observer pattern?",
+        options: [
+            "To create a single global instance of a class.",
+            "To allow one object to notify multiple objects of a change in its state.",
+            "To encapsulate algorithms in separate classes.",
+            "To improve memory management in object-oriented design."
+        ],
+        answer: "To allow one object to notify multiple objects of a change in its state."
+    },
+    {
+        question: "To write a Java program to demonstrate the Observer pattern using:\nAn Observer interface.\nA concrete Subject class to notify observers.\nMultiple concrete observer classes that react to state changes.\nWhich of the following correctly implements the notify() method in the Subject class?",
+        options: [
+            "Iterate through the list of observers and call their update() method.",
+            "Use a static method to update all observers.",
+            "Use inheritance to notify all observers.",
+            "Store observer states in a database."
+        ],
+        answer: "Iterate through the list of observers and call their update() method."
+    },
+    {
+        question: "Which of the following statements is true about Singleton, Factory, and Observer patterns?",
+        options: [
+            "The Singleton pattern is used for global access, the Factory pattern for object creation, and the Observer pattern for state management.",
+            "The Factory pattern is a creational pattern, while Singleton and Observer are structural patterns.",
+            "The Observer pattern is always implemented using threads.",
+            "The Singleton pattern ensures that an object is immutable."
+        ],
+        answer: "The Singleton pattern is used for global access, the Factory pattern for object creation, and the Observer pattern for state management."
+    },
+    {
+        question: "Which of the following use cases combines multiple design patterns?",
+        options: [
+            "A logging system using Singleton for a logger instance and Observer for notifying log subscribers.",
+            "A database system using Factory for creating connections and Observer for managing connection pools.",
+            "Both A and B.",
+            "Design patterns cannot be combined."
+        ],
+        answer: "Both A and B."
+    },
+    {
+        question: "Which of the following is a primary purpose of the Proxy Pattern?",
+        options: [
+            "To allow an object to send notifications to all its observers.",
+            "To provide a surrogate or placeholder for another object to control access and interactions.",
+            "To enable the creation of multiple independent instances of a class.",
+            "To ensure that a class only has one instance throughout the application."
+        ],
+        answer: "To provide a surrogate or placeholder for another object to control access and interactions."
+    }
+];
+
+const week11Questions = [
+    {
+        question: "To write a C++ program that uses std::thread to execute two functions concurrently:\nprintHello() prints 'Hello' five times.\nprintWorld() prints 'World' five times.\nWhat is the correct way to join threads after starting them?",
+        options: [
+            "Use thread1.start() and thread1.join().",
+            "Use thread1.join() and thread2.join().",
+            "Use thread1.detach() and thread2.detach().",
+            "Threads cannot be joined in C++."
+        ],
+        answer: "Use thread1.join() and thread2.join()."
+    },
+    {
+        question: "Which of the following is true about the Runnable interface in Java?",
+        options: [
+            "It has a method called run() that must be overridden.",
+            "It can only be used with the Thread class.",
+            "It supports multiple inheritance.",
+            "It cannot be implemented in a lambda expression."
+        ],
+        answer: "It has a method called run() that must be overridden."
+    },
+    {
+        question: "To write a Java program that creates two threads to:\nPrint numbers from 1 to 5 in one thread.\nPrint the squares of numbers from 1 to 5 in another thread.\nWhich of the following correctly starts both threads?",
+        options: [
+            "new Thread(thread1).run(); new Thread(thread2).run();",
+            "thread1.start(); thread2.start();",
+            "new Thread(thread1).start(); new Thread(thread2).start();",
+            "thread1.run(); thread2.run();"
+        ],
+        answer: "new Thread(thread1).start(); new Thread(thread2).start();"
+    },
+    {
+        question: "To write a Python program that creates a TCP server to:\nAccept connections from clients.\nReceive a message from the client and print it.\nSend an acknowledgment back to the client.\nWhich of the following is the correct method to bind the server to a port?",
+        options: [
+            "server.bind(('localhost', 8080))",
+            "server.listen(8080)",
+            "server.start(('localhost', 8080))",
+            "server.connect(('localhost', 8080))"
+        ],
+        answer: "server.bind(('localhost', 8080))"
+    },
+    {
+        question: "To write a Java Swing program that creates a window with:\nA JButton labeled 'Click Me'.\nAn event listener that displays 'Button Clicked' in the console when the button is clicked.\nWhich of the following methods is used to add an event listener to the button?",
+        options: [
+            "button.addActionListener()",
+            "button.addListener()",
+            "button.onClick()",
+            "button.setActionListener()"
+        ],
+        answer: "button.addActionListener()"
+    },
+    {
+        question: "To write a program to:\nCreate a multithreaded TCP server that handles multiple clients simultaneously.\nUse threads to process client requests independently.\nWhich of the following is essential for the server to handle multiple clients?",
+        options: [
+            "Use thread.join() for each client connection.",
+            "Use a separate thread for each client connection.",
+            "Use a single thread for all client connections.",
+            "Use the poll() function to manage threads."
+        ],
+        answer: "Use a separate thread for each client connection."
+    },
+    {
+        question: "Which scenario causes a thread to transition directly from the 'Running' state to the 'Terminated' state in Java?",
+        options: [
+            "The join() method is invoked on the thread object, causing the thread to stop execution immediately.",
+            "The thread completes its execution of the run() method without encountering exceptions or interruptions.",
+            "The sleep() method is called inside the thread, and the thread's sleep time expires.",
+            "The thread enters a synchronized block and encounters contention for a lock."
+        ],
+        answer: "The thread completes its execution of the run() method without encountering exceptions or interruptions."
+    }
+];
+
+const week12Questions = [
+    {
+        question: "Which of the following statements about constructors in Java is correct?",
+        options: [
+            "Constructors can have a return type.",
+            "A class can have only one constructor.",
+            "Constructors are automatically called when an object is created.",
+            "Constructors cannot be overloaded."
+        ],
+        answer: "Constructors are automatically called when an object is created."
+    },
+    {
+        question: "Which of the following best describes dynamic polymorphism?",
+        options: [
+            "Function overloading",
+            "Operator overloading",
+            "Method overriding",
+            "Constructor overloading"
+        ],
+        answer: "Method overriding"
+    },
+    {
+        question: "Which of the following best describes data hiding?",
+        options: [
+            "Using access specifiers to restrict access to class members.",
+            "Declaring all attributes as public.",
+            "Avoiding the use of constructors.",
+            "Using only static methods in a class."
+        ],
+        answer: "Using access specifiers to restrict access to class members."
+    },
+    {
+        question: "Which of the following is a checked exception in Java?",
+        options: [
+            "ArithmeticException",
+            "IOException",
+            "NullPointerException",
+            "ArrayIndexOutOfBoundsException"
+        ],
+        answer: "IOException"
+    },
+{
+    question: "Which of the following correctly opens a file for reading and writing in C++?",
+    options: [
+        "std::ifstream file(\"data.txt\");",
+        "std::ofstream file(\"data.txt\");",
+        "std::fstream file(\"data.txt\", std::ios::in | std::ios::out);",
+        "std::ofstream file(\"data.txt\", std::ios::in);"
+    ],
+    answer: "std::fstream file(\"data.txt\", std::ios::in | std::ios::out);"
+},
+
+    {
+        question: "What is the purpose of templates in C++?",
+        options: [
+            "To enforce runtime type safety.",
+            "To create reusable code that works with any data type.",
+            "To implement runtime polymorphism.",
+            "To overload operators."
+        ],
+        answer: "To create reusable code that works with any data type."
+    },
+    {
+        question: "Which of the following is a non-modifying STL algorithm?",
+        options: [
+            "std::sort()",
+            "std::find()",
+            "std::copy()",
+            "std::remove()"
+        ],
+        answer: "std::find()"
+    },
+    {
+        question: "Which of the following is a creational design pattern?",
+        options: [
+            "Singleton",
+            "Observer",
+            "Factory",
+            "Both A and C"
+        ],
+        answer: "Both A and C"
+    },
+    {
+        question: "Which of the following is true about std::thread in C++?",
+        options: [
+            "It can only execute functions, not lambdas.",
+            "Threads cannot be joined.",
+            "A thread must be joined or detached before destruction.",
+            "It does not support concurrency."
+        ],
+        answer: "A thread must be joined or detached before destruction."
+    },
+    {
+        question: "You want to add 0.5 to every earthquake magnitude in magnitudes = 4.2, 5.8, 3.9, 6.3 but store the modified values in a new vector called adjustedMagnitudes. Which of the following correctly performs this task?",
+        options: [
+            "std::transform(magnitudes.begin(), magnitudes.end(), adjustedMagnitudes.begin(), [](double mag) { return mag + 0.5; });",
+            "std::replace(magnitudes.begin(), magnitudes.end(), 6.0, 6.5);",
+            "std::replace_if(magnitudes.begin(), magnitudes.end(), [](double mag) { return mag >= 5.0; }, 5.5);",
+            "adjustedMagnitudes = std::transform(magnitudes.begin(), magnitudes.end(), [](double mag) { return mag + 0.5; });"
+        ],
+        answer: "std::transform(magnitudes.begin(), magnitudes.end(), adjustedMagnitudes.begin(), [](double mag) { return mag + 0.5; });"
+    }
+];
+
+
+
+let currentQuestion = 0;
+let score = 0;
+let currentQuestions = week1Questions;
+let answeredQuestions = new Set();
+
+function loadQuestions() {
+    const selectedWeek = document.getElementById('weekSelector').value;
+    if (selectedWeek === "week1") currentQuestions = week1Questions;
+    else if (selectedWeek === "week2") currentQuestions = week2Questions;
+    else if (selectedWeek === "week3") currentQuestions = week3Questions;
+    else if (selectedWeek === "week4") currentQuestions = week4Questions;
+    else if (selectedWeek === "week5") currentQuestions = week5Questions;
+    else if (selectedWeek === "week6") currentQuestions = week6Questions;
+    else if (selectedWeek === "week7") currentQuestions = week7Questions;
+    else if (selectedWeek === "week8") currentQuestions = week8Questions;
+    else if (selectedWeek === "week9") currentQuestions = week9Questions;
+    else if (selectedWeek === "week10") currentQuestions = week10Questions;
+    else if (selectedWeek === "week11") currentQuestions = week11Questions;
+    else if (selectedWeek === "week12") currentQuestions = week12Questions;
+
+
+    currentQuestion = 0;
+    score = 0;
+    answeredQuestions.clear();
+    document.getElementById('result').innerText = "";
+    document.getElementById('score').innerText = "Score: 0";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const quiz = document.getElementById('quiz');
+    quiz.innerHTML = '';
+    const q = currentQuestions[currentQuestion];
+    if (!q) {
+        quiz.innerHTML = "<div>No questions for this week.</div>";
+        return;
+    }
+    const qElem = document.createElement('div');
+    qElem.className = 'question';
+    qElem.innerText = `Q${currentQuestion + 1}. ${q.question}`;
+    quiz.appendChild(qElem);
+
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'options-container';
+    q.options.forEach(opt => {
+        const optElem = document.createElement('label');
+        optElem.className = 'option';
+        optElem.innerHTML = `<input type="radio" name="option" value="${opt}"> ${opt}`;
+        optionsContainer.appendChild(optElem);
+
+    });
+    quiz.appendChild(optionsContainer);
+
+    const navDiv = document.createElement('div');
+    navDiv.className = 'button-container';
+
+    const submitBtn = document.createElement('button');
+    submitBtn.innerText = 'Submit';
+    submitBtn.onclick = function() {
+        checkAnswer(submitBtn, prevBtn, nextBtn);
+    };
+    navDiv.appendChild(submitBtn);
+
+    const prevBtn = document.createElement('button');
+    prevBtn.innerText = 'Previous Question';
+    prevBtn.onclick = prevQuestion;
+    prevBtn.disabled = currentQuestion === 0;
+    navDiv.appendChild(prevBtn);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.innerText = (currentQuestion === currentQuestions.length - 1) ? 'Finish' : 'Next Question';
+    nextBtn.onclick = nextQuestion;
+    nextBtn.disabled = true;
+    navDiv.appendChild(nextBtn);
+
+    quiz.appendChild(navDiv);
+  updateProgressBar();
+}
+
+function checkAnswer(submitBtn, prevBtn, nextBtn) {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
+    if (!selectedOption) {
+        alert('Please select an answer!');
+        return;
+    }
+    const answer = selectedOption.value;
+    const correctAnswer = currentQuestions[currentQuestion].answer;
+
+    const options = document.querySelectorAll('.option');
+options.forEach(option => {
+    const input = option.querySelector('input[type="radio"]');
+    const optionValue = input ? input.value : '';
+    if (optionValue === correctAnswer) {
+        option.classList.add('correct');
+    } else if (optionValue === answer && answer !== correctAnswer) {
+        option.classList.add('incorrect');
+    }
+});
+
+
+    if (!answeredQuestions.has(currentQuestion) && answer === correctAnswer) {
+        score++;
+    }
+    answeredQuestions.add(currentQuestion);
+
+    document.getElementById('score').innerText = `Score: ${score}`;
+
+    document.querySelectorAll('input[name="option"]').forEach(input => {
+        input.disabled = true;
+    });
+
+    submitBtn.disabled = true;
+    nextBtn.disabled = false;
+    prevBtn.disabled = false;
+}
+
+function updateProgressBar() {
+    const bar = document.getElementById('progressBar');
+    if (!bar || !currentQuestions.length) return;
+    let percent = ((currentQuestion) / currentQuestions.length) * 100;
+    if (currentQuestion >= currentQuestions.length) percent = 100;
+    bar.style.width = percent + "%";
+}
+
+
+
+function nextQuestion() {
+    if (currentQuestion < currentQuestions.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+        updateProgressBar();
+    } else {
+        currentQuestion++;
+        updateProgressBar();
+        document.getElementById('quiz').innerHTML = '';
+        document.getElementById('result').innerText = `You have completed the test. Final Score: ${score}/${currentQuestions.length}`;
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+        updateProgressBar();
+    }
+}
+
+
+loadQuestions();
+</script>
+</body>
+</html>
