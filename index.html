@@ -179,6 +179,12 @@
 .progress-bar-bg { width: 100%; height: 8px; background: #23272b; border-radius: 6px; margin-bottom: 20px; overflow: hidden; }
 .progress-bar-fg { height: 100%; background: linear-gradient(90deg, #43a047 0%, #81c784 100%); border-radius: 6px; transition: width 0.3s; width: 0%; }
 
+.score-label, #total-score {
+  font-size: 1em; /* or inherit, if your parent sets the font size */
+  font-family: inherit;
+  font-weight: 500;
+}
+
 
     </style>
 </head>
@@ -207,6 +213,10 @@
     <div id="quiz"></div>
     <div class="score" id="score">Score: 0</div>
     <div class="result" id="result"></div>
+    
+    <span class="score-label">Total Score:</span> <span id="total-score">0</span>
+
+
 </div>
 <script>
 const week1Questions = [
@@ -1039,6 +1049,7 @@ options.forEach(option => {
     } else if (optionValue === answer && answer !== correctAnswer) {
         option.classList.add('incorrect');
     }
+    
 });
 
 
@@ -1052,6 +1063,10 @@ options.forEach(option => {
     document.querySelectorAll('input[name="option"]').forEach(input => {
         input.disabled = true;
     });
+
+const weekIndex = document.getElementById('weekSelector').selectedIndex;
+updateWeekScore(weekIndex, score);
+
 
     submitBtn.disabled = true;
     nextBtn.disabled = false;
@@ -1078,8 +1093,22 @@ function nextQuestion() {
         updateProgressBar();
         document.getElementById('quiz').innerHTML = '';
         document.getElementById('result').innerText = `You have completed the test. Final Score: ${score}/${currentQuestions.length}`;
+
+        // Get the selected week index (0-based)
+        const weekIndex = document.getElementById('weekSelector').selectedIndex;
+        updateWeekScore(weekIndex, score);
+
+        // If this is the last week (week 12, index 11), show total score and hide the total score line
+        if (weekIndex === 11) {
+            document.getElementById('result').innerText += `\n\nAll weeks complete! Your total score is: ${weekScores.reduce((a,b) => a+b, 0)}`;
+            // Hide the total score line
+            document.querySelector('.score-label').style.display = 'none';
+            document.getElementById('total-score').style.display = 'none';
+        }
     }
 }
+
+
 
 function prevQuestion() {
     if (currentQuestion > 0) {
@@ -1088,6 +1117,21 @@ function prevQuestion() {
         updateProgressBar();
     }
 }
+// Assume you have 12 weeks
+let weekScores = Array(12).fill(0); // Initialize scores for 12 weeks
+
+function updateWeekScore(weekIndex, score) {
+    weekScores[weekIndex] = score;
+    updateTotalScore();
+}
+
+function updateTotalScore() {
+    const total = weekScores.reduce((sum, val) => sum + val, 0);
+    document.getElementById('total-score').textContent = total;
+}
+
+
+
 
 
 loadQuestions();
