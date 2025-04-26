@@ -225,7 +225,7 @@
     <div class="result" id="result"></div>
     
     <span class="score-label">Total Score:</span> <span id="total-score">0</span>
-    <div class="footer-credit">Made by Armaan 🤙 </div>
+    <div class="footer-credit">Made by Armaan 🤙🏻 </div>
 
 
 
@@ -1104,20 +1104,56 @@ function nextQuestion() {
         currentQuestion++;
         updateProgressBar();
         document.getElementById('quiz').innerHTML = '';
-        document.getElementById('result').innerText = `You have completed the test. Final Score: ${score}/${currentQuestions.length}`;
-
-        // Get the selected week index (0-based)
         const weekIndex = document.getElementById('weekSelector').selectedIndex;
+        document.getElementById('result').innerText = `You have completed Week ${weekIndex + 1}. Final Score: ${score}/${currentQuestions.length}`;
         updateWeekScore(weekIndex, score);
 
-        // If this is the last week (week 12, index 11), show total score and hide the total score line
-        if (weekIndex === 11) {
-            document.getElementById('result').innerText += `\n\nAll weeks complete! Your total score is: ${weekScores.reduce((a,b) => a+b, 0)}`;
-            // Hide the total score line
+        // Add spacing above Total Score
+        document.querySelector('.score-label').style.display = 'inline-block';
+        document.querySelector('.score-label').style.marginTop = '18px';
+        document.getElementById('total-score').style.display = 'inline-block';
+        document.getElementById('total-score').style.marginTop = '18px';
+
+        // If not last week, show Next Week button
+        const weekSelector = document.getElementById('weekSelector');
+        if (weekIndex < weekSelector.options.length - 1) {
+            const nextWeekBtn = document.createElement('button');
+            nextWeekBtn.innerText = "Next Week";
+            nextWeekBtn.style.marginTop = "18px";
+            nextWeekBtn.onclick = function() {
+                weekSelector.selectedIndex = weekIndex + 1;
+                loadQuestions();
+            };
+            document.getElementById('quiz').appendChild(nextWeekBtn);
+        } else {
+            // At end of week 12, show total score summary and hide the total score line
+            const totalCorrect = weekScores.reduce((a, b) => a + b, 0);
+            const totalQuestions =
+                week1Questions.length + week2Questions.length + week3Questions.length + week4Questions.length +
+                week5Questions.length + week6Questions.length + week7Questions.length + week8Questions.length +
+                week9Questions.length + week10Questions.length + week11Questions.length + week12Questions.length;
+            document.getElementById('result').innerText = `All weeks complete! Your total score is: ${totalCorrect}/${totalQuestions} 🤙🏻`;
             document.querySelector('.score-label').style.display = 'none';
             document.getElementById('total-score').style.display = 'none';
+            weekSelector.disabled = true;
         }
     }
+}
+
+
+function getTotalQuestions() {
+    return week1Questions.length +
+           week2Questions.length +
+           week3Questions.length +
+           week4Questions.length +
+           week5Questions.length +
+           week6Questions.length +
+           week7Questions.length +
+           week8Questions.length +
+           week9Questions.length +
+           week10Questions.length +
+           week11Questions.length +
+           week12Questions.length;
 }
 
 
